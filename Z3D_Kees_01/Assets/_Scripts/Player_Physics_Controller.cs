@@ -27,7 +27,7 @@ public class Player_Physics_Controller : MonoBehaviour {
 	// Update is called once per frame
 void FixedUpdate () {
 		//This is the freeze option controlled by gameController
-		if(gameController.Freeze_Counter==0f){
+		//if(gameController.Freeze_Counter==0f){
 		
 		#region [rotation]
 
@@ -46,7 +46,7 @@ void FixedUpdate () {
 		rigidbody.velocity = AddPos * speed*Time.fixedDeltaTime;
 		rigidbody.AddForce(current_normal*-Gravity_Strength);
 		#endregion
-		}
+		//}
 	}
 	
 	void OnCollisionStay(Collision collision) {

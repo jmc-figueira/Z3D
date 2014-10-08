@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//This is the freeze option controlled by gameController
-		if(gameController.Freeze_Counter==0f){
+		//if(gameController.Freeze_Counter==0f){
 		
 		/*#region [rotation]
 		//the yaw of the ball is adjusted
@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour {
 		
 		
 		#endregion
-		}
+		//}
 	}
 	
 	void OnTriggerEnter(Collider other){
