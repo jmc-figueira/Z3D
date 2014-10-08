@@ -7,7 +7,18 @@ public class CameraController : MonoBehaviour {
 	public float cam_rot_speed;
 	
 	public float smoothTime = 0.3F;
+	public float smoothingNormal = 0.95f;
+	public float smoothingPosition = 0.95f;
     private float Velocity = 10.0F;
+	
+	private Vector3 V1;
+	private Vector3 V2;
+	private Vector3 V3;
+	private Vector3 V4;
+	private Vector3 V5;
+	private Vector3 VFinal;
+	
+	private Vector3 smoothNormal = Vector3.zero;
 	
 	public GameObject Cam_Attachement;
 	public Player_Physics_Controller player_Physics_Controller;
@@ -15,22 +26,30 @@ public class CameraController : MonoBehaviour {
 	private Vector3 new_Position;
 	// Use this for initialization
 	void Start () {
-	new_Position = Cam_Attachement.transform.position;
+	V1 = Cam_Attachement.transform.position;
+	V2 = Cam_Attachement.transform.position;
+	V3 = Cam_Attachement.transform.position;
+	V4 = Cam_Attachement.transform.position;
+	V5 = Cam_Attachement.transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		new_Position = Cam_Attachement.transform.position;
+		V1=V2;
+		V2=V3;
+		V3=V4;
+		V4=V5;
+		V5 = Cam_Attachement.transform.position;
 		
-		//new_Position.x = Mathf.SmoothDamp(transform.position.x, Cam_Attachement.transform.position.x, ref Velocity, smoothTime);
-		//new_Position.y = Mathf.SmoothDamp(transform.position.y, Cam_Attachement.transform.position.y, ref Velocity, smoothTime);
-		//new_Position.z = Mathf.SmoothDamp(transform.position.z, Cam_Attachement.transform.position.z, ref Velocity, smoothTime);
+		VFinal=(V1+V2+V3+V4+V5)/5f;
 		
+		smoothNormal = smoothingNormal * smoothNormal + (1f - smoothingNormal) * player_Physics_Controller.current_normal;
 		
-		transform.position = new_Position;
+		//transform.position = Cam_Attachement.transform.position;
+		transform.position = Cam_Attachement.transform.position * (1f - smoothingPosition) + smoothingPosition * transform.position;
 		//transform.rotation = Cam_Attachement.transform.rotation;
 		//rigidbody.velocity =(Cam_Attachement.transform.position-transform.position)*cam_speed;
-		transform.LookAt(player_Physics_Controller.transform, player_Physics_Controller.current_normal);
+		transform.LookAt(player_Physics_Controller.transform, smoothNormal);
 		//transform.rotation = Quaternion.LookRotation(player_Physics_Controller.rigidbody.velocity,player_Physics_Controller.current_normal);
 	}
 }
