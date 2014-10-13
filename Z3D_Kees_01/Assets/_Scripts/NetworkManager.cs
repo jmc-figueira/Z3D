@@ -5,6 +5,7 @@ public class NetworkManager : MonoBehaviour {
 	public GameObject playerPrefab;
 	public Transform spawnObject;
 	public Camera mainCamera;
+	public GameObject GUI_ingame; //added by Daan 13-10-2014
 
 	private float buttonX;
 	private float buttonY;
@@ -72,6 +73,9 @@ public class NetworkManager : MonoBehaviour {
 		CameraController controller = mainCamera.GetComponent<CameraController> ();
 		Player_Physics_Controller phys = go.transform.GetChild(1).GetComponent<Player_Physics_Controller> ();
 		controller.associate(go.transform.GetChild(1).transform.GetChild(0).gameObject, phys);
+		// we also have to activate the GUI system (edit by Daan 13-10-2014)
+		GUI_ingame.SetActive (true);
+
 	}
 
 }
