@@ -46,12 +46,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\_Scripts\Billboard.cs" />
      <Compile Include="Assets\_Scripts\CameraController.cs" />
      <Compile Include="Assets\_Scripts\GameController.cs" />
      <Compile Include="Assets\_Scripts\NetworkManager.cs" />
      <Compile Include="Assets\_Scripts\PlayerController.cs" />
      <Compile Include="Assets\_Scripts\Player_Physics_Controller.cs" />
      <Compile Include="Assets\_Scripts\Tail_Behaviour.cs" />
+     <Compile Include="Assets\_Scripts\orbits.cs" />
+     <Compile Include="Assets\_Scripts\randomRotate.cs" />
      <None Include="Assets\_Materials\DoubleSided.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
