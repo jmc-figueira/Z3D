@@ -17,7 +17,15 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+<<<<<<< HEAD:Z3D_Kees_02_Lag_Compensation/Z3D_Kees_01-csharp.sln
+<<<<<<< HEAD:Z3D_Kees_02_Lag_Compensation/Z3D_Kees_01-csharp.sln
+										GlobalSection(MonoDevelopProperties) = preSolution
+=======
 																											GlobalSection(MonoDevelopProperties) = preSolution
+>>>>>>> 808677300cfc1d12d79280a97d20bddd13872865:Z3D_Kees_01/Z3D_Kees_01-csharp.sln
+=======
+																																										GlobalSection(MonoDevelopProperties) = preSolution
+>>>>>>> 26f75e5821c1720e9bdeedd57e79dac264835e84:Z3D_Kees_01/Z3D_Kees_01-csharp.sln
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
