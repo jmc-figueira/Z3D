@@ -51,6 +51,7 @@
      <Compile Include="Assets\_Scripts\NetworkManager.cs" />
      <Compile Include="Assets\_Scripts\PlayerController.cs" />
      <Compile Include="Assets\_Scripts\Player_Physics_Controller.cs" />
+     <Compile Include="Assets\_Scripts\Tail_Behaviour.cs" />
      <None Include="Assets\_Materials\DoubleSided.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
