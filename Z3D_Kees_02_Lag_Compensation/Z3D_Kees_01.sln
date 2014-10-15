@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{F72514D4-7D82-1905-FCA3-D591BFC78A86}") = "Z3D_Kees_01", "Assembly-CSharp.csproj", "{473D8BBF-C180-5AFB-A792-31674730B5B9}"
 EndProject
+Project("{F72514D4-7D82-1905-FCA3-D591BFC78A86}") = "Z3D_Kees_01", "Assembly-UnityScript.unityproj", "{B5542AB0-21AD-8E82-E6E6-698F2C2E4F31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,11 +15,19 @@ Global
 		{473D8BBF-C180-5AFB-A792-31674730B5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{473D8BBF-C180-5AFB-A792-31674730B5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{473D8BBF-C180-5AFB-A792-31674730B5B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5542AB0-21AD-8E82-E6E6-698F2C2E4F31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5542AB0-21AD-8E82-E6E6-698F2C2E4F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5542AB0-21AD-8E82-E6E6-698F2C2E4F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5542AB0-21AD-8E82-E6E6-698F2C2E4F31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+<<<<<<< HEAD:Z3D_Kees_02_Lag_Compensation/Z3D_Kees_01.sln
 									GlobalSection(MonoDevelopProperties) = preSolution
+=======
+																										GlobalSection(MonoDevelopProperties) = preSolution
+>>>>>>> 808677300cfc1d12d79280a97d20bddd13872865:Z3D_Kees_01/Z3D_Kees_01.sln
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
