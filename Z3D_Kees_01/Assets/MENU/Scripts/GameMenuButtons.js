@@ -40,7 +40,7 @@ function OnMouseUp(){
 	//is this singleplayermode?
 	if (isSinglePlayer==true) {
 		//load level
-		Application.LoadLevel(1);
+		Application.LoadLevel(2);
 	}
 	//is this multiplayermode?
 	if (isMultiPlayer==true) {
