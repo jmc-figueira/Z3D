@@ -1,9 +1,0 @@
-fileFormatVersion: 2
-guid: 7a1e330ca9b4dbf4e9b9f147dca16f93
-MonoImporter:
-  serializedVersion: 2
-  defaultReferences:
-  - snd_click: {fileID: 8300000, guid: dd395321e6e3a044ab92d710ea1f74a1, type: 3}
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
