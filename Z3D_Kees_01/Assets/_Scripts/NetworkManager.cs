@@ -3,9 +3,10 @@ using System.Collections;
 
 public class NetworkManager : MonoBehaviour {
 	public GameObject playerPrefab;
-	public Transform spawnObject;
+	public Transform[] spawnPoints;
 	public Camera mainCamera;
 	public GameObject GUI_ingame; //added by Daan 13-10-2014
+	public int maxPlayers;
 
 	private float buttonX;
 	private float buttonY;
@@ -14,12 +15,14 @@ public class NetworkManager : MonoBehaviour {
 	private const string gameSeekName = "Zatacka 3D DEMO";
 	private bool refreshing;
 	private HostData[] hostData;
+	private int currentPlayer;
 
 	void Start () {
 		buttonX = Screen.width * 0.05f;
 		buttonY = Screen.width * 0.05f;
 		buttonW = Screen.width * 0.1f;
 		buttonH = Screen.width * 0.1f;
+		currentPlayer = 0;
 	}
 
 	void startServer(){
@@ -28,11 +31,17 @@ public class NetworkManager : MonoBehaviour {
 	}
 
 	void OnServerInitialized(){
-		spawnPlayer();
+		spawnPlayer(currentPlayer);
+		currentPlayer++;
 	}
 
 	void OnConnectedToServer(){
-		spawnPlayer();
+		if(currentPlayer >= maxPlayers)
+			Debug.Log("Maximum player count exceeded");
+		else{
+			spawnPlayer(currentPlayer);
+			currentPlayer++;
+		}
 	}
 
 	void refreshHostList(){
@@ -68,8 +77,8 @@ public class NetworkManager : MonoBehaviour {
 		}
 	}
 
-	void spawnPlayer(){
-		GameObject go = (GameObject) Network.Instantiate(playerPrefab, spawnObject.position, Quaternion.identity, 0);
+	void spawnPlayer(int player){
+		GameObject go = (GameObject) Network.Instantiate(playerPrefab, spawnPoints[player].position, Quaternion.identity, 0);
 		CameraController controller = mainCamera.GetComponent<CameraController> ();
 		Player_Physics_Controller phys = go.transform.GetChild(1).GetComponent<Player_Physics_Controller> ();
 		controller.associate(go.transform.GetChild(1).transform.GetChild(0).gameObject, phys);
