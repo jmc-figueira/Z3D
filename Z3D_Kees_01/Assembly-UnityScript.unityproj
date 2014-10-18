@@ -46,13 +46,17 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\MENU\Scripts\GameMenuButtons.js" />
-     <Compile Include="Assets\MENU\Scripts\GameMenuIntro.js" />
-     <Compile Include="Assets\MENU\Scripts\SoundControlScript.js" />
+     <Compile Include="Assets\_Scripts\GameMenuButtons.js" />
+     <Compile Include="Assets\_Scripts\GameMenuIntro.js" />
+     <Compile Include="Assets\_Scripts\SoundControlScript.js" />
      <None Include="Assets\_Materials\DoubleSided.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{1E631E20-9AD4-EB22-9E4C-9962DF3D90C4}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

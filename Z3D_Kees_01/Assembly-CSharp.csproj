@@ -49,12 +49,7 @@
      <Compile Include="Assets\GUI 16102014\Scripts\SCORECONTROL.cs" />
      <Compile Include="Assets\_Scripts\BackToMenu.cs" />
      <Compile Include="Assets\_Scripts\Billboard.cs" />
-     <Compile Include="Assets\_Scripts\CameraController.cs" />
-     <Compile Include="Assets\_Scripts\GameController.cs" />
-     <Compile Include="Assets\_Scripts\NetworkManager.cs" />
      <Compile Include="Assets\_Scripts\PauzeDummyScript.cs" />
-     <Compile Include="Assets\_Scripts\PlayerController.cs" />
-     <Compile Include="Assets\_Scripts\Player_Physics_Controller.cs" />
      <Compile Include="Assets\_Scripts\Tail_Behaviour.cs" />
      <Compile Include="Assets\_Scripts\orbits.cs" />
      <Compile Include="Assets\_Scripts\randomRotate.cs" />
@@ -62,6 +57,10 @@
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{1E631E20-9AD4-EB22-9E4C-9962DF3D90C4}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
