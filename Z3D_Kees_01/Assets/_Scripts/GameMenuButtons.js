@@ -8,14 +8,17 @@ var isTutorial = false;
 var isCredits = false;
 var isStartServer = false;
 var isRefreshHostList = false;
-
+var isStartGame = false;
 var isNQuit=false;
+var isNBack=false;
+
 
 //menu 1, 2 and credits for deactivation system
 public var menu1 :GameObject;
 public var menu2 :GameObject;
 public var menuCredits :GameObject;
 public var NetworkMenu :GameObject;
+public var ServerMenu :GameObject;
 
 public var networkManager :NetworkManager;
 var snd_enter : AudioClip; // drag the sound here
@@ -52,14 +55,28 @@ function OnMouseUp(){
 		NetworkMenu.SetActive(false);
 	}
 	
+	if (isNBack==true) {
+		//quit the game
+		NetworkMenu.SetActive(true);
+		ServerMenu.SetActive(false);
+		//SERVER NEEDS TO BE SHURTDOWN?
+	}
+	
 	//is this singleplayermode?
 	if (isSinglePlayer==true) {
 		//load level
 		Application.LoadLevel(2);
 	}
 	
+	if (isStartGame==true) {
+		//load level
+		Application.LoadLevel(1);
+	}
+	
 	if(isStartServer==true){
 	 networkManager.startServer();
+	 NetworkMenu.SetActive(false);
+	ServerMenu.SetActive(true);
 	}
 	
 	if(isRefreshHostList==true){

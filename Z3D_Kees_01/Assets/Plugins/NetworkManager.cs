@@ -66,15 +66,15 @@ public class NetworkManager : MonoBehaviour {
 
 	public void OnGUI(){
 		if(Network.peerType == NetworkPeerType.Disconnected){
-			if (GUI.Button (new Rect (buttonX, buttonY, buttonW, buttonH), "Start Server")) {
+			/*if (GUI.Button (new Rect (buttonX, buttonY, buttonW, buttonH), "Start Server")) {
 				startServer ();
 			}
 			if (GUI.Button (new Rect (buttonX, buttonY * 1.2f + buttonH, buttonW, buttonH), "Refresh Server")) {
 				refreshHostList ();
-			}
+			}*/
 			if (hostData != null) {
 				for (int i = 0; i < hostData.Length; i++) {
-					if (GUI.Button (new Rect (buttonX * 1.5f + buttonW, buttonY * 1.2f + (buttonH * i), buttonW * 3, buttonH * 0.5f), hostData [i].gameName)) {
+					if (GUI.Button (new Rect (buttonX * 1.5f + buttonW, buttonY * 1.2f + (buttonH * i), buttonW * 3, buttonH * 1f), hostData [i].gameName)) {
 						Network.Connect (hostData [i]);
 					}
 				}

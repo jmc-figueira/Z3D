@@ -16,25 +16,15 @@ Platform assembly: C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Mana
 Loading C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
 Platform assembly: C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.069 seconds
+- Completed reload, in  0.126 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 Platform assembly: C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Managed\System.dll (this message is harmless)
-UnloadTime: 2.019456 ms
+UnloadTime: 1.832906 ms
 Platform assembly: C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Managed\System.Core.dll (this message is harmless)
-Unloading 5 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 52 unused Assets to reduce memory usage. Loaded Objects now: 329.
-Total: 1.338456 ms (FindLiveObjects: 0.024752 ms CreateObjectMapping: 0.012074 ms MarkObjects: 0.159986 ms  DeleteObjects: 0.556029 ms)
-
-Look rotation viewing vector is zero
- 
-(Filename:  Line: 57)
-
-UnloadTime: 6.545575 ms
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 369.
-Total: 3.723165 ms (FindLiveObjects: 0.058561 ms CreateObjectMapping: 0.028375 ms MarkObjects: 0.430455 ms  DeleteObjects: 1.287743 ms)
+Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 381.
+Total: 1.997722 ms (FindLiveObjects: 0.327822 ms CreateObjectMapping: 0.012074 ms MarkObjects: 0.156364 ms  DeleteObjects: 0.839780 ms)
 
