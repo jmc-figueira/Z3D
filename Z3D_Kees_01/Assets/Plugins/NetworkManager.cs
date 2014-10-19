@@ -3,7 +3,6 @@ using System.Collections;
 
 public class NetworkManager : MonoBehaviour {
 	public GameObject playerPrefab;
-	public Camera mainCamera;
 	public GameObject GUI_ingame; //added by Daan 13-10-2014
 	public int maxPlayers;
 
@@ -15,7 +14,6 @@ public class NetworkManager : MonoBehaviour {
 	private bool refreshing;
 	private HostData[] hostData;
 	private int currentPlayer;
-	private bool Ingame = false;
 	
 	private GameObject spawnpoint;
 	
@@ -39,10 +37,9 @@ public class NetworkManager : MonoBehaviour {
 	}
 	
 	 void OnLevelWasLoaded(int level) {
-	 if (level == 1 && !Ingame){
-            print("Woohoo");
+		 print("LEVEL1LOADED");
+	 if (level == 1){
 			spawnPlayer();
-			Ingame = true;
 	 }
         
     }
@@ -118,7 +115,7 @@ public class NetworkManager : MonoBehaviour {
 		spawnpoint = GameObject.Find("SpawnPoint_1");
 		if(spawnpoint!=null){
 		GameObject go = (GameObject) Network.Instantiate(playerPrefab, spawnpoint.transform.position, Quaternion.identity, 0);
-		CameraController controller = mainCamera.GetComponent<CameraController> ();
+		CameraController controller = Camera.main.GetComponent<CameraController> ();
 		Player_Physics_Controller phys = go.transform.GetChild(1).GetComponent<Player_Physics_Controller> ();
 		controller.associate(go.transform.GetChild(1).transform.GetChild(0).gameObject, phys);
 		// we also have to activate the GUI system (edit by Daan 13-10-2014)
