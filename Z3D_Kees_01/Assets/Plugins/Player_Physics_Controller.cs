@@ -26,27 +26,29 @@ public class Player_Physics_Controller : MonoBehaviour {
 	
 	// Update is called once per frame
 void FixedUpdate () {
-		//This is the freeze option controlled by gameController
-		//if(gameController.Freeze_Counter==0f){
-		
-		#region [rotation]
+		if(networkView.isMine){
+			//This is the freeze option controlled by gameController
+			//if(gameController.Freeze_Counter==0f){
+			
+			#region [rotation]
 
-		transform.rotation = Quaternion.LookRotation(rigidbody.velocity,current_normal);
-		rot_vector = new Vector3(0f,Input.GetAxis("Horizontal") * (Time.deltaTime * rot_speed),0f);
-		transform.rotation *= Quaternion.Euler(rot_vector);
+			transform.rotation = Quaternion.LookRotation(rigidbody.velocity,current_normal);
+			rot_vector = new Vector3(0f,Input.GetAxis("Horizontal") * (Time.deltaTime * rot_speed),0f);
+			transform.rotation *= Quaternion.Euler(rot_vector);
 
-		playerController.transform.rotation = transform.rotation;
-		#endregion
+			playerController.transform.rotation = transform.rotation;
+			#endregion
 
-		#region [velocity]
-		//Movement in direction of the object
-		Vector3 AddPos = transform.rotation * Vector3.forward;
-		//transform.position += AddPos * speed*Time.fixedDeltaTime;
-		//transform.position += previous_normal*-0.05f;
-		rigidbody.velocity = AddPos * speed*Time.fixedDeltaTime;
-		rigidbody.AddForce(current_normal*-Gravity_Strength);
-		#endregion
-		//}
+			#region [velocity]
+			//Movement in direction of the object
+			Vector3 AddPos = transform.rotation * Vector3.forward;
+			//transform.position += AddPos * speed*Time.fixedDeltaTime;
+			//transform.position += previous_normal*-0.05f;
+			rigidbody.velocity = AddPos * speed*Time.fixedDeltaTime;
+			rigidbody.AddForce(current_normal*-Gravity_Strength);
+			#endregion
+			//}
+		}
 	}
 	
 	void OnCollisionStay(Collision collision) {

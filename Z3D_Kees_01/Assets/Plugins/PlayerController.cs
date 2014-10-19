@@ -37,52 +37,54 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//This is the freeze option controlled by gameController
-		//if(gameController.Freeze_Counter==0f){
-		
-		/*#region [rotation]
-		//the yaw of the ball is adjusted
-		rot_vector = new Vector3(0f,Input.GetAxis("Horizontal") * (Time.deltaTime * rot_speed),0f);
-		transform.rotation *= Quaternion.Euler(rot_vector);
-		#endregion
+		if(networkView.isMine){
+			//This is the freeze option controlled by gameController
+			//if(gameController.Freeze_Counter==0f){
+			
+			/*#region [rotation]
+			//the yaw of the ball is adjusted
+			rot_vector = new Vector3(0f,Input.GetAxis("Horizontal") * (Time.deltaTime * rot_speed),0f);
+			transform.rotation *= Quaternion.Euler(rot_vector);
+			#endregion
 
-		#region [velocity]
-		//Movement in direction of the object
-		Vector3 AddPos = transform.rotation * Vector3.forward;
-		transform.position += AddPos * speed*Time.fixedDeltaTime;
-		//rigidbody.velocity = AddPos * speed*Time.fixedDeltaTime;
-		#endregion*/
-		
-		transform.position = PlayerPhysics.transform.position;
-		
-		#region [Tail Creation]
-		if(temp_counter==Mathf.Ceil(temp_counter_init*speed*speed)){
-			temp_counter=0f;
-			//if new block must be drawn
-			if(gap_width ==0f){
-				//if not drawing a gap
-				if(gap_counter==0f){
-					//start drawing new gap
-					gap_counter=Gap_Counter_init;
-					gap_width = Gap_Width_init;
+			#region [velocity]
+			//Movement in direction of the object
+			Vector3 AddPos = transform.rotation * Vector3.forward;
+			transform.position += AddPos * speed*Time.fixedDeltaTime;
+			//rigidbody.velocity = AddPos * speed*Time.fixedDeltaTime;
+			#endregion*/
+			
+			transform.position = PlayerPhysics.transform.position;
+			
+			#region [Tail Creation]
+			if(temp_counter==Mathf.Ceil(temp_counter_init*speed*speed)){
+				temp_counter=0f;
+				//if new block must be drawn
+				if(gap_width ==0f){
+					//if not drawing a gap
+					if(gap_counter==0f){
+						//start drawing new gap
+						gap_counter=Gap_Counter_init;
+						gap_width = Gap_Width_init;
+					}else{
+						//draw normal block
+						Instantiate(Tail, transform.position, transform.rotation);
+						gap_counter--;
+					}
 				}else{
-					//draw normal block
-					Instantiate(Tail, transform.position, transform.rotation);
-					gap_counter--;
+				//if drawing a gap keep doing it
+					gap_width--;
 				}
 			}else{
-			//if drawing a gap keep doing it
-				gap_width--;
+				//if no new block must be drawn
+				temp_counter++;	
 			}
-		}else{
-			//if no new block must be drawn
-			temp_counter++;	
+			
+			
+			
+			#endregion
+			//}
 		}
-		
-		
-		
-		#endregion
-		//}
 	}
 	
 	void OnTriggerEnter(Collider other){
