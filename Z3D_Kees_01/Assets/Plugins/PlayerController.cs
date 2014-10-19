@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour {
 						gap_width = Gap_Width_init;
 					}else{
 						//draw normal block
-						Instantiate(Tail, transform.position, transform.rotation);
+						Network.Instantiate(Tail, transform.position, transform.rotation, 0);
 						gap_counter--;
 					}
 				}else{
