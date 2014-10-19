@@ -12,7 +12,7 @@ public class NetworkManager : MonoBehaviour {
 	private float buttonH;
 	private const string gameSeekName = "Zatacka 3D DEMO";
 	private bool refreshing;
-	private HostData[] hostData;
+	public HostData[] hostData;
 	private int currentPlayer;
 	
 	private GameObject spawnpoint;

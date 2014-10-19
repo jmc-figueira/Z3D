@@ -11,7 +11,7 @@ var isRefreshHostList = false;
 var isStartGame = false;
 var isNQuit=false;
 var isLogout=false;
-
+var isJoinGame=false;
 
 //menu 1, 2 and credits for deactivation system
 public var menu1 :GameObject;
@@ -19,6 +19,7 @@ public var menu2 :GameObject;
 public var menuCredits :GameObject;
 public var NetworkMenu :GameObject;
 public var ServerMenu :GameObject;
+public var ClientMenu :GameObject;
 
 public var networkManager :NetworkManager;
 var snd_enter : AudioClip; // drag the sound here
@@ -68,6 +69,12 @@ function OnMouseUp(){
 	if (isSinglePlayer==true) {
 		//load level
 		Application.LoadLevel(2);
+	}
+	
+	if (isJoinGame==true){
+		Network.Connect(networkManager.hostData [0]);
+		NetworkMenu.SetActive(false);
+		ClientMenu.SetActive(true);
 	}
 	
 	if (isStartGame==true) {
