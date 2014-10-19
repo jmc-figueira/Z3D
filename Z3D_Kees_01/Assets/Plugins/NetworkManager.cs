@@ -3,7 +3,6 @@ using System.Collections;
 
 public class NetworkManager : MonoBehaviour {
 	public GameObject playerPrefab;
-	public Transform[] spawnPoints;
 	public Camera mainCamera;
 	public GameObject GUI_ingame; //added by Daan 13-10-2014
 	public int maxPlayers;
@@ -16,13 +15,17 @@ public class NetworkManager : MonoBehaviour {
 	private bool refreshing;
 	private HostData[] hostData;
 	private int currentPlayer;
-
+	private bool Ingame = false;
+	
+	private GameObject spawnpoint;
+	
 	public string username = "";
 	bool RegisterUI = false;
 	bool LoginUI = false;
 	
 	
 	public void Start () {
+		DontDestroyOnLoad(this);
 		buttonX = Screen.width * 0.05f;
 		buttonY = Screen.width * 0.05f;
 		buttonW = Screen.width * 0.1f;
@@ -34,18 +37,23 @@ public class NetworkManager : MonoBehaviour {
 		Network.InitializeServer (4, 250001, !Network.HavePublicAddress());
 		MasterServer.RegisterHost (gameSeekName, "Zatacka 3D DEMO Game", "A simple networking demo for Zatacka 3D");
 	}
+	
+	 void OnLevelWasLoaded(int level) {
+	 if (level == 1 && !Ingame){
+            print("Woohoo");
+			spawnPlayer();
+			Ingame = true;
+	 }
+        
+    }
 
 	public void OnServerInitialized(){
-		//spawnPlayer(currentPlayer);
-		currentPlayer++;
 	}
 
 	public void OnConnectedToServer(){
 		if(currentPlayer >= maxPlayers)
 			Debug.Log("Maximum player count exceeded");
 		else{
-			//spawnPlayer(currentPlayer);
-			currentPlayer++;
 		}
 	}
 
@@ -106,14 +114,16 @@ public class NetworkManager : MonoBehaviour {
 			Application.LoadLevel(number);
 		}
 
-	public void spawnPlayer(int player){
-		GameObject go = (GameObject) Network.Instantiate(playerPrefab, spawnPoints[player].position, Quaternion.identity, 0);
+	public void spawnPlayer(){
+		spawnpoint = GameObject.Find("SpawnPoint_1");
+		if(spawnpoint!=null){
+		GameObject go = (GameObject) Network.Instantiate(playerPrefab, spawnpoint.transform.position, Quaternion.identity, 0);
 		CameraController controller = mainCamera.GetComponent<CameraController> ();
 		Player_Physics_Controller phys = go.transform.GetChild(1).GetComponent<Player_Physics_Controller> ();
 		controller.associate(go.transform.GetChild(1).transform.GetChild(0).gameObject, phys);
 		// we also have to activate the GUI system (edit by Daan 13-10-2014)
 		GUI_ingame.SetActive (true);
-
+		}
 	}
 
 }
