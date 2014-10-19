@@ -20,6 +20,7 @@ public var menuCredits :GameObject;
 public var NetworkMenu :GameObject;
 public var ServerMenu :GameObject;
 public var ClientMenu :GameObject;
+public var JoinGame :GameObject;
 
 public var networkManager :NetworkManager;
 var snd_enter : AudioClip; // drag the sound here
@@ -90,6 +91,9 @@ function OnMouseUp(){
 	
 	if(isRefreshHostList==true){
 	 networkManager.refreshHostList();
+	 if(networkManager.hostData != null){
+		 JoinGame.SetActive(true);
+	 }
 	}
 	
 	//is this multiplayermode?
