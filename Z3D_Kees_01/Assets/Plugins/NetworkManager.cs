@@ -65,6 +65,19 @@ public class NetworkManager : MonoBehaviour {
 	}
 
 	public void OnGUI(){
+		if(Network.peerType == NetworkPeerType.Server)
+			{
+				GUI.Label(new Rect(100,100,100,25),"Server");
+				GUI.Label(new Rect(100,125,100,25),"Connections: " + Network.connections.Length);
+				
+				if(GUI.Button(new Rect(100,150,100,25),"Logout"))
+				{
+					Network.Disconnect(250);	
+				}
+			}
+			if(Network.peerType == NetworkPeerType.Client){
+				GUI.Label(new Rect(100,100,100,25),"Client");
+			}
 		if(Network.peerType == NetworkPeerType.Disconnected){
 			/*if (GUI.Button (new Rect (buttonX, buttonY, buttonW, buttonH), "Start Server")) {
 				startServer ();
@@ -72,6 +85,7 @@ public class NetworkManager : MonoBehaviour {
 			if (GUI.Button (new Rect (buttonX, buttonY * 1.2f + buttonH, buttonW, buttonH), "Refresh Server")) {
 				refreshHostList ();
 			}*/
+			
 			if (hostData != null) {
 				for (int i = 0; i < hostData.Length; i++) {
 					if (GUI.Button (new Rect (buttonX * 1.5f + buttonW, buttonY * 1.2f + (buttonH * i), buttonW * 3, buttonH * 1f), hostData [i].gameName)) {
@@ -81,6 +95,16 @@ public class NetworkManager : MonoBehaviour {
 			}
 		}
 	}
+	
+	public void StartMGame(){
+		Debug.Log("StartGame");
+		networkView.RPC( "LoadLevel", RPCMode.AllBuffered,1);
+	}
+	
+	[RPC]
+		public void LoadLevel(int number){
+			Application.LoadLevel(number);
+		}
 
 	public void spawnPlayer(int player){
 		GameObject go = (GameObject) Network.Instantiate(playerPrefab, spawnPoints[player].position, Quaternion.identity, 0);

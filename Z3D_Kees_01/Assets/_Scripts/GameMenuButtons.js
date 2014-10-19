@@ -10,7 +10,7 @@ var isStartServer = false;
 var isRefreshHostList = false;
 var isStartGame = false;
 var isNQuit=false;
-var isNBack=false;
+var isLogout=false;
 
 
 //menu 1, 2 and credits for deactivation system
@@ -55,10 +55,12 @@ function OnMouseUp(){
 		NetworkMenu.SetActive(false);
 	}
 	
-	if (isNBack==true) {
+	if (isLogout==true) {
 		//quit the game
+		Network.Disconnect(250);
 		NetworkMenu.SetActive(true);
 		ServerMenu.SetActive(false);
+		Debug.Log("Doin it");
 		//SERVER NEEDS TO BE SHURTDOWN?
 	}
 	
@@ -70,7 +72,7 @@ function OnMouseUp(){
 	
 	if (isStartGame==true) {
 		//load level
-		Application.LoadLevel(1);
+		networkManager.StartMGame();
 	}
 	
 	if(isStartServer==true){
