@@ -112,9 +112,12 @@ public class NetworkManager : MonoBehaviour {
 		}
 
 	public void spawnPlayer(){
-		spawnpoint = GameObject.Find("SpawnPoint_1");
+		if(Network.peerType == NetworkPeerType.Server)
+			spawnpoint = GameObject.Find("SpawnPoint_1");
+		else
+			spawnpoint = GameObject.Find("SpawnPoint_2");
 		if(spawnpoint!=null){
-		GameObject go = (GameObject) Network.Instantiate(playerPrefab, spawnpoint.transform.position, Quaternion.identity, 0);
+		GameObject go = (GameObject) Network.Instantiate(playerPrefab, spawnpoint.transform.position, spawnpoint.transform.rotation, 0);
 		CameraController controller = Camera.main.GetComponent<CameraController> ();
 		Player_Physics_Controller phys = go.transform.GetChild(1).GetComponent<Player_Physics_Controller> ();
 		controller.associate(go.transform.GetChild(1).transform.GetChild(0).gameObject, phys);
