@@ -12,6 +12,9 @@ public class BackToMenu : MonoBehaviour {
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			Application.LoadLevel(0);
+			GameObject GUI;
+			GUI = GameObject.Find("GUISYSTEM");
+			Destroy(GUI);
 		}
 	}
 }

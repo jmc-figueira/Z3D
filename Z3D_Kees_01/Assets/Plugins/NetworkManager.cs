@@ -109,6 +109,9 @@ public class NetworkManager : MonoBehaviour {
 	[RPC]
 		public void LoadLevel(int number){
 			Application.LoadLevel(number);
+			GameObject GUI;
+			GUI = GameObject.Find("GUISYSTEM");
+			GUI.SetActive(true);
 		}
 
 	public void spawnPlayer(){
