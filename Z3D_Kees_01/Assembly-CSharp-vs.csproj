@@ -50,6 +50,7 @@
      <Compile Include="Assets\Referee.cs" />
      <Compile Include="Assets\_Scripts\BackToMenu.cs" />
      <Compile Include="Assets\_Scripts\Billboard.cs" />
+     <Compile Include="Assets\_Scripts\DontkillonLevelLoad.cs" />
      <Compile Include="Assets\_Scripts\PauzeDummyScript.cs" />
      <Compile Include="Assets\_Scripts\Tail_Behaviour.cs" />
      <Compile Include="Assets\_Scripts\orbits.cs" />

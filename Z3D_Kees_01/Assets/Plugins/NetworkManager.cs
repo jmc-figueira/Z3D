@@ -73,8 +73,8 @@ public class NetworkManager : MonoBehaviour {
 	public void OnGUI(){
 		if(Network.peerType == NetworkPeerType.Server)
 			{
-				GUI.Label(new Rect(100,100,100,25),"Server");
-				GUI.Label(new Rect(100,125,100,25),"Connections: " + Network.connections.Length);
+				GUI.Label(new Rect(Screen.width-100,5,100,25),"Server");
+				GUI.Label(new Rect(Screen.width-100,30,100,25),"Connections: " + Network.connections.Length);
 				
 				/*if(GUI.Button(new Rect(100,150,100,25),"Logout"))
 				{
@@ -82,7 +82,7 @@ public class NetworkManager : MonoBehaviour {
 				}*/
 			}
 			if(Network.peerType == NetworkPeerType.Client){
-				GUI.Label(new Rect(100,100,100,25),"Client");
+				GUI.Label(new Rect(Screen.width-100,5,100,25),"Client");
 			}
 		if(Network.peerType == NetworkPeerType.Disconnected){
 			/*if (GUI.Button (new Rect (buttonX, buttonY, buttonW, buttonH), "Start Server")) {
