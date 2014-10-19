@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class NetworkManager : MonoBehaviour {
-	public GameObject playerPrefab;
+	public GameObject playerPrefab1;
+	public GameObject playerPrefab2;
+	private GameObject playerPrefab;
 	public GameObject GUI_ingame; //added by Daan 13-10-2014
 	public int maxPlayers;
 
@@ -110,18 +112,20 @@ public class NetworkManager : MonoBehaviour {
 		}
 
 	public void spawnPlayer(){
-		if(Network.peerType == NetworkPeerType.Server)
+	if(Network.peerType == NetworkPeerType.Server){
 			spawnpoint = GameObject.Find("SpawnPoint_1");
-		else
-			spawnpoint = GameObject.Find("SpawnPoint_2");
-		if(spawnpoint!=null){
+			playerPrefab = playerPrefab1;
+	}
+	else{
+		spawnpoint = GameObject.Find("SpawnPoint_2");
+		playerPrefab = playerPrefab2;
+	}
 		GameObject go = (GameObject) Network.Instantiate(playerPrefab, spawnpoint.transform.position, spawnpoint.transform.rotation, 0);
 		CameraController controller = Camera.main.GetComponent<CameraController> ();
 		Player_Physics_Controller phys = go.transform.GetChild(1).GetComponent<Player_Physics_Controller> ();
 		controller.associate(go.transform.GetChild(1).transform.GetChild(0).gameObject, phys);
 		// we also have to activate the GUI system (edit by Daan 13-10-2014)
 		GUI_ingame.SetActive (true);
-		}
 	}
 
 }
