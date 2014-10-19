@@ -16,11 +16,8 @@ Platform assembly: C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Mana
 Loading C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
 Platform assembly: C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.306 seconds
+- Completed reload, in  0.132 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-Doin it
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
+Platform assembly: C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Managed\Boo.Lang.dll (this message is harmless)
