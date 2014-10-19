@@ -16,7 +16,7 @@ Platform assembly: C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Mana
 Loading C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
 Platform assembly: C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.261 seconds
+- Completed reload, in  0.235 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -26,12 +26,12 @@ StartGame
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
 Platform assembly: C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Managed\System.dll (this message is harmless)
-UnloadTime: 1.371660 ms
+UnloadTime: 0.916453 ms
 Platform assembly: C:\Users\Kees\Documents\GitHub\Z3D\Z3D_Kees_01\test_Data\Managed\System.Core.dll (this message is harmless)
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 385.
-Total: 2.492172 ms (FindLiveObjects: 0.040449 ms CreateObjectMapping: 0.016904 ms MarkObjects: 0.236056 ms  DeleteObjects: 1.375283 ms)
+Unloading 26 unused Assets to reduce memory usage. Loaded Objects now: 381.
+Total: 2.136579 ms (FindLiveObjects: 0.058561 ms CreateObjectMapping: 0.020526 ms MarkObjects: 0.257790 ms  DeleteObjects: 0.780011 ms)
 
 LEVEL1LOADED
  
