@@ -91,8 +91,10 @@ function OnMouseUp(){
 	
 	if(isRefreshHostList==true){
 	 networkManager.refreshHostList();
+	 yield WaitForSeconds (3);
 	 if(networkManager.hostData != null){
 		 JoinGame.SetActive(true);
+		 print("trying to enable joingame button");
 	 }
 	}
 	

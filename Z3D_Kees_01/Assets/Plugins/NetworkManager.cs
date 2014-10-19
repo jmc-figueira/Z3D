@@ -75,10 +75,10 @@ public class NetworkManager : MonoBehaviour {
 				GUI.Label(new Rect(100,100,100,25),"Server");
 				GUI.Label(new Rect(100,125,100,25),"Connections: " + Network.connections.Length);
 				
-				if(GUI.Button(new Rect(100,150,100,25),"Logout"))
+				/*if(GUI.Button(new Rect(100,150,100,25),"Logout"))
 				{
 					Network.Disconnect(250);	
-				}
+				}*/
 			}
 			if(Network.peerType == NetworkPeerType.Client){
 				GUI.Label(new Rect(100,100,100,25),"Client");
@@ -91,13 +91,13 @@ public class NetworkManager : MonoBehaviour {
 				refreshHostList ();
 			}*/
 			
-			if (hostData != null) {
+			/*if (hostData != null) {
 				for (int i = 0; i < hostData.Length; i++) {
 					if (GUI.Button (new Rect (buttonX * 1.5f + buttonW, buttonY * 1.2f + (buttonH * i), buttonW * 3, buttonH * 1f), hostData [i].gameName)) {
 						Network.Connect (hostData [i]);
 					}
 				}
-			}
+			}*/
 		}
 	}
 	
