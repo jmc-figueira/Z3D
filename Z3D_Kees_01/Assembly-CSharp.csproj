@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\GUI 16102014\Scripts\SCORECONTROL.cs" />
+     <Compile Include="Assets\Referee.cs" />
      <Compile Include="Assets\_Scripts\BackToMenu.cs" />
      <Compile Include="Assets\_Scripts\Billboard.cs" />
      <Compile Include="Assets\_Scripts\PauzeDummyScript.cs" />
