@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.tag == "Tail"){
 			//if colliding with an object with label "Tail" set freezecounter
-			gameController.Freeze_Counter = 120f;
+			Debug.Log("died");
 		}
 	}
 	

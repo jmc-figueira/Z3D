@@ -62,7 +62,6 @@ function OnMouseUp(){
 		Network.Disconnect(250);
 		NetworkMenu.SetActive(true);
 		ServerMenu.SetActive(false);
-		Debug.Log("Doin it");
 		//SERVER NEEDS TO BE SHURTDOWN?
 	}
 	
@@ -94,7 +93,6 @@ function OnMouseUp(){
 	 yield WaitForSeconds (3);
 	 if(networkManager.hostData != null){
 		 JoinGame.SetActive(true);
-		 print("trying to enable joingame button");
 	 }
 	}
 	

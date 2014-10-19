@@ -37,7 +37,6 @@ public class NetworkManager : MonoBehaviour {
 	}
 	
 	 void OnLevelWasLoaded(int level) {
-		 print("LEVEL1LOADED");
 	 if (level == 1){
 			spawnPlayer();
 	 }
@@ -102,7 +101,6 @@ public class NetworkManager : MonoBehaviour {
 	}
 	
 	public void StartMGame(){
-		Debug.Log("StartGame");
 		networkView.RPC( "LoadLevel", RPCMode.AllBuffered,1);
 	}
 	
