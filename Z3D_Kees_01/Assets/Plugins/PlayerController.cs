@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
 	public float Gap_Counter_init;
 	public float Gap_Width_init;
 	public int playerNum;
+	public bool offline = false;
 	
 	public Text Debugger;
 	public GameObject Tail;
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(networkView.isMine){
+		if(networkView.isMine || offline){
 			//This is the freeze option controlled by gameController
 			//if(gameController.Freeze_Counter==0f){
 			
@@ -71,7 +72,11 @@ public class PlayerController : MonoBehaviour {
 						gap_width = Gap_Width_init;
 					}else{
 						//draw normal block
+						if(offline){
+							Instantiate(Tail, transform.position, transform.rotation);
+						}else
 						Network.Instantiate(Tail, transform.position, transform.rotation, 0);
+						
 						gap_counter--;
 					}
 				}else{
