@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour {
 			//if colliding with an object with label "Tail" set freezecounter
 			GameObject Network = GameObject.Find ("NetworkController");
 			NetworkManager networkManager = Network.GetComponent<NetworkManager>();
+			Debug.Log("Player " + playerNum + " died");
 			networkManager.StartMGame();
 			hasDied = true;
 		}
