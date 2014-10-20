@@ -117,6 +117,11 @@ public class NetworkManager : MonoBehaviour {
 			}*/
 		}
 	}
+
+	public void RestartMGame(){
+		if(Network.peerType == NetworkPeerType.Server)
+			StartMGame();
+	}
 	
 	public void StartMGame(){
 		networkView.RPC( "LoadLevel", RPCMode.AllBuffered,1);
