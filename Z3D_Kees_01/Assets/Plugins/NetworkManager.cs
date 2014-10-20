@@ -47,8 +47,7 @@ public class NetworkManager : MonoBehaviour {
 	 void OnLevelWasLoaded(int level) {
 	 if (level == 1){
 			if(scoreCounter == null){
-				scoreCounter = (GameObject) Network.Instantiate(GUI_Prefab, , 0);
-				scoreCounter = GameObject.Find("GUISYSTEM");
+				scoreCounter = (GameObject) Network.Instantiate(GUI_Prefab, new Vector3(0,0,0), Quaternion.identity, 0);
 				scoreCounter.SetActive(true);
 			}
 			levelloaded = true;
