@@ -4,6 +4,7 @@ using System.Collections;
 public class NetworkManager : MonoBehaviour {
 	public GameObject playerPrefab1;
 	public GameObject playerPrefab2;
+	public GameObject GUI_Prefab;
 	private GameObject playerPrefab;
 	public GameObject GUI_ingame; //added by Daan 13-10-2014
 	public int maxPlayers;
@@ -46,6 +47,7 @@ public class NetworkManager : MonoBehaviour {
 	 void OnLevelWasLoaded(int level) {
 	 if (level == 1){
 			if(scoreCounter == null){
+				scoreCounter = (GameObject) Network.Instantiate(GUI_Prefab, , 0);
 				scoreCounter = GameObject.Find("GUISYSTEM");
 				scoreCounter.SetActive(true);
 			}
