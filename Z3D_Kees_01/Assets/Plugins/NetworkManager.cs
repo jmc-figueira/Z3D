@@ -21,6 +21,7 @@ public class NetworkManager : MonoBehaviour {
 	public HostData[] hostData;
 	private int currentPlayer;
 	private bool levelloaded;
+	private bool hasRestartedAfterDeath;
 	
 	private GameObject spawnpoint;
 	
@@ -37,6 +38,7 @@ public class NetworkManager : MonoBehaviour {
 		buttonH = Screen.width * 0.02f;
 		currentPlayer = 0;
 		levelloaded = false;
+		hasRestartedAfterDeath = false;
 	}
 
 	public void startServer(){
@@ -58,6 +60,7 @@ public class NetworkManager : MonoBehaviour {
 				}
 			}
 			spawnPlayer();
+			hasRestartedAfterDeath = true;
 	 }
         
     }
@@ -117,22 +120,27 @@ public class NetworkManager : MonoBehaviour {
 			}*/
 		}
 	}
+	[RPC]
+	public void ProcessPlayerDied(int playernumber){
+		if(Network.peerType == NetworkPeerType.Server && hasRestartedAfterDeath){
+			hasRestartedAfterDeath = false;
+			referee.GetComponent<Referee>().playerScoredPoint(playernumber);
+		}
+	}
+
 
 	public void PlayerDied(int playernum){
-		if(playernum == 1 && Network.peerType == NetworkPeerType.Server)
-			referee.GetComponent<Referee>().playerScoredPoint(2);
-		else if(playernum == 2 && Network.peerType == NetworkPeerType.Client)
-			networkView.RPC("updateClientPlayerScore", RPCMode.Server, 1);
+		if(playernum == 1 && Network.peerType == NetworkPeerType.Server){
+			networkView.RPC("ProcessPlayerDied", RPCMode.AllBuffered, 2);
+		}
+		else if(playernum == 2 && Network.peerType == NetworkPeerType.Client){
+			networkView.RPC("ProcessPlayerDied", RPCMode.AllBuffered, 1);
+		}
 	}
 	
 	public void StartMGame(){
 		networkView.RPC( "LoadLevel", RPCMode.AllBuffered,1);
 	}
-
-	[RPC]
-		public void updateClientPlayerScore(int playernum){
-			referee.GetComponent<Referee>().playerScoredPoint(playernum);
-		}
 
 	[RPC]
 		public void LoadLevel(int number){

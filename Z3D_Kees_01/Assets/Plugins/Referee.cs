@@ -14,6 +14,7 @@ public class Referee : MonoBehaviour {
 	}
 
 	public void playerScoredPoint(int playerNum){
+		Debug.Log ("Player " + playerNum + " scored a point!");
 		GameObject networkController = GameObject.Find ("NetworkController");
 		NetworkManager networkManager = networkController.GetComponent<NetworkManager>();
 		switch(playerNum){
@@ -24,6 +25,8 @@ public class Referee : MonoBehaviour {
 				player2Score++;
 				break;
 		}
+		Debug.Log ("Player 1's score: " + player1Score);
+		Debug.Log ("Player 2's score: " + player2Score);
 		networkManager.StartMGame();
 	}
 	
