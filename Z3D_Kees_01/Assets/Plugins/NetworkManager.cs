@@ -38,7 +38,7 @@ public class NetworkManager : MonoBehaviour {
 		buttonH = Screen.width * 0.02f;
 		currentPlayer = 0;
 		levelloaded = false;
-		hasRestartedAfterDeath = false;
+		hasRestartedAfterDeath = true;
 	}
 
 	public void startServer(){
@@ -145,6 +145,7 @@ public class NetworkManager : MonoBehaviour {
 	[RPC]
 		public void LoadLevel(int number){
 			Application.LoadLevel(number);
+			hasRestartedAfterDeath = true;
 		}
 
 
