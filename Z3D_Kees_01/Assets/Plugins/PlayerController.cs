@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour {
 			GameObject Network = GameObject.Find ("NetworkController");
 			NetworkManager networkManager = Network.GetComponent<NetworkManager>();
 			Debug.Log("Player " + playerNum + " died");
-			networkManager.RestartMGame();
+			networkManager.RestartMGame(playerNum);
 			hasDied = true;
 		}
 	}
