@@ -4,12 +4,13 @@ using System.Collections;
 public class NetworkManager : MonoBehaviour {
 	public GameObject playerPrefab1;
 	public GameObject playerPrefab2;
+	public GameObject refereePrefab;
 	public GameObject GUI_Prefab;
 	private GameObject playerPrefab;
 	public GameObject GUI_ingame; //added by Daan 13-10-2014
 	public int maxPlayers;
-	public GameObject referee;
-	public GameObject scoreCounter;
+	private GameObject referee;
+	private GameObject scoreCounter;
 
 	private float buttonX;
 	private float buttonY;
@@ -20,7 +21,7 @@ public class NetworkManager : MonoBehaviour {
 	public HostData[] hostData;
 	private int currentPlayer;
 	private bool levelloaded;
-	private GameObject clientplayer;
+	private bool hasRestartedAfterDeath;
 	
 	private GameObject spawnpoint;
 	
@@ -37,27 +38,30 @@ public class NetworkManager : MonoBehaviour {
 		buttonH = Screen.width * 0.02f;
 		currentPlayer = 0;
 		levelloaded = false;
+		hasRestartedAfterDeath = true;
 	}
 
 	public void startServer(){
-		Network.InitializeServer (4, 250001, !Network.HavePublicAddress());
+		Network.InitializeServer (2, 250001, !Network.HavePublicAddress());
 		MasterServer.RegisterHost (gameSeekName, "Zatacka 3D DEMO Game", "A simple networking demo for Zatacka 3D");
 	}
 	
 	 void OnLevelWasLoaded(int level) {
-	 if (level == 1){
-			if(scoreCounter == null){
-				scoreCounter = (GameObject) Network.Instantiate(GUI_Prefab, new Vector3(0,0,0), Quaternion.identity, 0);
-				scoreCounter.SetActive(true);
-			}
+	 	if (level == 1){
 			levelloaded = true;
 			if(Network.peerType == NetworkPeerType.Server){
-				referee = GameObject.Find("Referee");
-				referee.SetActive(true);
+				if(referee == null){
+					referee = (GameObject) Network.Instantiate(refereePrefab,new Vector3(0,0,0), Quaternion.identity, 0);
+					referee.SetActive(true);
+				}
+				if(scoreCounter == null){
+					scoreCounter = (GameObject) Network.Instantiate(GUI_Prefab, new Vector3(0,0,0), Quaternion.identity, 0);
+					scoreCounter.SetActive(true);
+				}
 			}
 			spawnPlayer();
-	 }
-        
+	 	}
+		hasRestartedAfterDeath = true;
     }
 
 	public void OnServerInitialized(){
@@ -75,17 +79,12 @@ public class NetworkManager : MonoBehaviour {
 		refreshing = true;
 	}
 
-	public void Update() {
+	public void Update(){
 		if (refreshing) {
 			if(MasterServer.PollHostList().Length > 0){
 				refreshing = false;
 				hostData = MasterServer.PollHostList();
 			}
-		}
-		if (Network.peerType == NetworkPeerType.Server && levelloaded == true) {
-			int scorep1 = referee.GetComponent<Referee>().getCurrentScore(1);
-			int scorep2 = referee.GetComponent<Referee>().getCurrentScore(2);
-			networkView.RPC("updateScore",RPCMode.AllBuffered, scorep1, scorep2);
 		}
 	}
 
@@ -120,34 +119,35 @@ public class NetworkManager : MonoBehaviour {
 			}*/
 		}
 	}
+	[RPC]
+	public void ProcessPlayerDied(int playernumber){
+		hasRestartedAfterDeath = true;
+		if(Network.peerType == NetworkPeerType.Server && hasRestartedAfterDeath){
+			hasRestartedAfterDeath = false;
+			referee.GetComponent<Referee>().playerScoredPoint(playernumber);
+		}
+	}
 
-	public void RestartMGame(){
-		if(Network.peerType == NetworkPeerType.Server)
-			StartMGame();
+
+	public void PlayerDied(int playernum){
+		if(playernum == 1 && Network.peerType == NetworkPeerType.Server){
+			networkView.RPC("ProcessPlayerDied", RPCMode.AllBuffered, 2);
+		}
+		else if(playernum == 2 && Network.peerType == NetworkPeerType.Client){
+			networkView.RPC("ProcessPlayerDied", RPCMode.AllBuffered, 1);
+		}
 	}
 	
 	public void StartMGame(){
 		networkView.RPC( "LoadLevel", RPCMode.AllBuffered,1);
 	}
-	
+
 	[RPC]
 		public void LoadLevel(int number){
 			Application.LoadLevel(number);
+			hasRestartedAfterDeath = true;
 		}
 
-	[RPC]
-		public void updateScore(int score1, int score2){
-			scoreCounter.GetComponent<SCORECONTROL>().SetScore1(score1);
-			scoreCounter.GetComponent<SCORECONTROL>().SetScore2(score2);
-		}
-
-	[RPC]
-		public void addToReferee(int playernum, NetworkViewID viewid){
-			if(Network.peerType == NetworkPeerType.Server){
-				NetworkView view = NetworkView.Find(viewid);
-				referee.GetComponent<Referee>().addPlayerToTrack(playernum, view.gameObject.GetComponent<NetworkManager>().clientplayer);
-			}
-		}
 
 	public void spawnPlayer(){
 		int playerNum;
@@ -165,12 +165,6 @@ public class NetworkManager : MonoBehaviour {
 		CameraController controller = Camera.main.GetComponent<CameraController> ();
 		Player_Physics_Controller phys = go.transform.GetChild(1).GetComponent<Player_Physics_Controller> ();
 		controller.associate(go.transform.GetChild(1).transform.GetChild(0).gameObject, phys);
-		if(Network.peerType == NetworkPeerType.Server)
-			referee.GetComponent<Referee>().addPlayerToTrack(playerNum, go.transform.GetChild(0).gameObject);
-		else if(Network.peerType == NetworkPeerType.Client){
-			clientplayer = go.transform.GetChild(0).gameObject;
-			networkView.RPC("addToReferee", RPCMode.AllBuffered, playerNum, networkView.viewID);
-		}
 		// we also have to activate the GUI system (edit by Daan 13-10-2014)
 		GUI_ingame.SetActive (true);
 	}

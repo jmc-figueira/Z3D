@@ -12,10 +12,12 @@ public class BackToMenu : MonoBehaviour {
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			Application.LoadLevel(0);
-			GameObject guiSys = GameObject.Find("GUISYSTEM");
+			GameObject guiSys = GameObject.FindGameObjectWithTag("GSystem");
 			Destroy(guiSys);
 			GameObject networkC = GameObject.Find("NetworkController");
 			Destroy(networkC);
+			GameObject referee = GameObject.FindGameObjectWithTag("Referee");
+			Destroy(referee);
 		}
 	}
 }
