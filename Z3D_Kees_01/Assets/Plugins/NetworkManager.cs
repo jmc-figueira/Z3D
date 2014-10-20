@@ -118,6 +118,10 @@ public class NetworkManager : MonoBehaviour {
 		}
 	}
 
+		[RPC]
+		public void UpdateScore(int P1, int P2){
+		Debug.Log("i want to update to" + P1+P2);
+	}
 
 	public void PlayerDied(int playernum){
 		if(playernum == 1 && Network.peerType == NetworkPeerType.Server){

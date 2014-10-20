@@ -6,18 +6,21 @@ public class Referee : MonoBehaviour {
 	private int player2Score;
 	public GameObject scoreGUI;
 	public GameObject scoreGUI_prefab;
+	public GameObject networkController; 
+	public NetworkManager networkManager;
 
 	// Use this for initialization
 	void Start () {
 		DontDestroyOnLoad(gameObject);
 		player1Score = 0;
 		player2Score = 0;
+		networkController = GameObject.Find("NetworkController");
+		networkManager = networkController.GetComponent<NetworkManager>();
 	}
 
 	public void playerScoredPoint(int playerNum){
-		Debug.Log ("Player " + playerNum + " scored a point!");
-		GameObject networkController = GameObject.Find ("NetworkController");
-		NetworkManager networkManager = networkController.GetComponent<NetworkManager>();
+		//GameObject networkController = GameObject.Find("NetworkController");
+		//NetworkManager networkManager = networkController.GetComponent<NetworkManager>();
 		switch(playerNum){
 			case 1:
 				player1Score++;
@@ -26,10 +29,10 @@ public class Referee : MonoBehaviour {
 				player2Score++;
 				break;
 		}
-		Debug.Log ("Player 1's score: " + player1Score);
-		Debug.Log ("Player 2's score: " + player2Score);
 		networkManager.StartMGame();
 	}
+	
+
 	
 	void FixedUpdate(){
 		if(Network.peerType == NetworkPeerType.Server){
@@ -43,13 +46,13 @@ public class Referee : MonoBehaviour {
 			}
 			else{
 				if(scoreGUI == null){
-					Debug.Log ("Instantiating");
 					scoreGUI = (GameObject) Network.Instantiate(scoreGUI_prefab, new Vector3(0,0,0), Quaternion.identity, 0);
 					scoreGUI.SetActive(true);
 				}
 				else{
-					scoreGUI.GetComponent<SCORECONTROL>().SetScore1(player1Score);
-					scoreGUI.GetComponent<SCORECONTROL>().SetScore2(player2Score);
+					//scoreGUI.GetComponent<SCORECONTROL>().SetScore1(player1Score);
+					//scoreGUI.GetComponent<SCORECONTROL>().SetScore2(player2Score);
+					networkManager.networkView.RPC("UpdateScore", RPCMode.AllBuffered, 2,3);
 				}
 			}
 		}
