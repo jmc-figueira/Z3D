@@ -125,21 +125,20 @@ public class NetworkManager : MonoBehaviour {
 	[RPC]
 		public void LoadLevel(int number){
 			Application.LoadLevel(number);
-			/*scoreCounter = GameObject.Find("GUISYSTEM");
-			scoreCounter.SetActive(true);
-			levelloaded = true;*/
 		}
 
 	[RPC]
 		public void updateScore(int score1, int score2){
-			scoreCounter.GetComponent<SCORECONTROL>().AddScore1(score1);
-			scoreCounter.GetComponent<SCORECONTROL>().AddScore2(score2);
+			scoreCounter.GetComponent<SCORECONTROL>().SetScore1(score1);
+			scoreCounter.GetComponent<SCORECONTROL>().SetScore2(score2);
 		}
 
 	[RPC]
 		public void addToReferee(int playernum, NetworkViewID viewid){
-			NetworkView view = NetworkView.Find(viewid);
-		referee.GetComponent<Referee>().addPlayerToTrack(playernum, view.gameObject.GetComponent<NetworkManager>().clientplayer);
+			if(Network.peerType == NetworkPeerType.Server){
+				NetworkView view = NetworkView.Find(viewid);
+				referee.GetComponent<Referee>().addPlayerToTrack(playernum, view.gameObject.GetComponent<NetworkManager>().clientplayer);
+			}
 		}
 
 	public void spawnPlayer(){
@@ -159,10 +158,10 @@ public class NetworkManager : MonoBehaviour {
 		Player_Physics_Controller phys = go.transform.GetChild(1).GetComponent<Player_Physics_Controller> ();
 		controller.associate(go.transform.GetChild(1).transform.GetChild(0).gameObject, phys);
 		if(Network.peerType == NetworkPeerType.Server)
-			referee.GetComponent<Referee>().addPlayerToTrack(playerNum, go);
+			referee.GetComponent<Referee>().addPlayerToTrack(playerNum, go.transform.GetChild(0).gameObject);
 		else if(Network.peerType == NetworkPeerType.Client){
-			clientplayer = go;
-			networkView.RPC("addToReferee", RPCMode.Server, playerNum, networkView.viewID);
+			clientplayer = go.transform.GetChild(0).gameObject;
+			networkView.RPC("addToReferee", RPCMode.AllBuffered, playerNum, networkView.viewID);
 		}
 		// we also have to activate the GUI system (edit by Daan 13-10-2014)
 		GUI_ingame.SetActive (true);

@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 	public float temp_counter_init;
 	public float Gap_Counter_init;
 	public float Gap_Width_init;
+	public int playerNum;
 	
 	public Text Debugger;
 	public GameObject Tail;
@@ -92,12 +93,19 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.tag == "Tail"){
 			//if colliding with an object with label "Tail" set freezecounter
+			GameObject Network = GameObject.Find ("NetworkController");
+			NetworkManager networkManager = Network.GetComponent<NetworkManager>();
+			networkManager.StartMGame();
 			hasDied = true;
 		}
 	}
 
 	public bool isDead(){
-		return hasDied;
+		if(hasDied){
+			hasDied = false;
+			return true;
+		}
+		return false;
 	}
 
 	/*void OnCollisionEnter(Collision collision) {

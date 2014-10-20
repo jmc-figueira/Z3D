@@ -49,20 +49,20 @@ public class SCORECONTROL : MonoBehaviour {
 		}
 	}*/
 
-	public void AddScore1 (int newScoreValue) {
-		score1 += newScoreValue;
+	public void SetScore1 (int newScoreValue) {
+		score1 = newScoreValue;
 		UpdateScore(1);
 	}
-	public void AddScore2 (int newScoreValue) {
-		score2 += newScoreValue;
+	public void SetScore2 (int newScoreValue) {
+		score2 = newScoreValue;
 		UpdateScore(2);
 	}
-	public void AddScore3 (int newScoreValue) {
-		score3 += newScoreValue;
+	public void SetScore3 (int newScoreValue) {
+		score3 = newScoreValue;
 		UpdateScore(3);
 	}
-	public void AddScore4 (int newScoreValue) {
-		score4 += newScoreValue;
+	public void SetScore4 (int newScoreValue) {
+		score4 = newScoreValue;
 		UpdateScore(4);
 	}
 
