@@ -7,6 +7,8 @@ public class NetworkManager : MonoBehaviour {
 	private GameObject playerPrefab;
 	public GameObject GUI_ingame; //added by Daan 13-10-2014
 	public int maxPlayers;
+	public GameObject referee;
+	public GameObject scoreCounter;
 
 	private float buttonX;
 	private float buttonY;
@@ -16,6 +18,7 @@ public class NetworkManager : MonoBehaviour {
 	private bool refreshing;
 	public HostData[] hostData;
 	private int currentPlayer;
+	private bool levelloaded;
 	
 	private GameObject spawnpoint;
 	
@@ -31,6 +34,7 @@ public class NetworkManager : MonoBehaviour {
 		buttonW = Screen.width * 0.1f;
 		buttonH = Screen.width * 0.02f;
 		currentPlayer = 0;
+		levelloaded = false;
 	}
 
 	public void startServer(){
@@ -40,6 +44,11 @@ public class NetworkManager : MonoBehaviour {
 	
 	 void OnLevelWasLoaded(int level) {
 	 if (level == 1){
+			scoreCounter = GameObject.Find("GUISYSTEM");
+			scoreCounter.SetActive(true);
+			levelloaded = true;
+			referee = GameObject.Find("Referee");
+			referee.SetActive(true);
 			spawnPlayer();
 	 }
         
@@ -67,7 +76,11 @@ public class NetworkManager : MonoBehaviour {
 				hostData = MasterServer.PollHostList();
 			}
 		}
-
+		if (Network.peerType == NetworkPeerType.Server && levelloaded == true) {
+			int scorep1 = referee.GetComponent<Referee>().getCurrentScore(1);
+			int scorep2 = referee.GetComponent<Referee>().getCurrentScore(2);
+			networkView.RPC("updateScore",RPCMode.AllBuffered, scorep1, scorep2);
+		}
 	}
 
 	public void OnGUI(){
@@ -109,24 +122,34 @@ public class NetworkManager : MonoBehaviour {
 	[RPC]
 		public void LoadLevel(int number){
 			Application.LoadLevel(number);
-			GameObject GUI;
-			GUI = GameObject.Find("GUISYSTEM");
-			GUI.SetActive(true);
+			/*scoreCounter = GameObject.Find("GUISYSTEM");
+			scoreCounter.SetActive(true);
+			levelloaded = true;*/
+		}
+
+	[RPC]
+		public void updateScore(int score1, int score2){
+			scoreCounter.GetComponent<SCORECONTROL>().AddScore1(score1);
+			scoreCounter.GetComponent<SCORECONTROL>().AddScore2(score2);
 		}
 
 	public void spawnPlayer(){
-	if(Network.peerType == NetworkPeerType.Server){
+		int playerNum;
+		if(Network.peerType == NetworkPeerType.Server){
 			spawnpoint = GameObject.Find("SpawnPoint_1");
 			playerPrefab = playerPrefab1;
-	}
-	else{
-		spawnpoint = GameObject.Find("SpawnPoint_2");
-		playerPrefab = playerPrefab2;
-	}
+			playerNum = 1;
+		}
+		else{
+			spawnpoint = GameObject.Find("SpawnPoint_2");
+			playerPrefab = playerPrefab2;
+			playerNum = 2;
+		}
 		GameObject go = (GameObject) Network.Instantiate(playerPrefab, spawnpoint.transform.position, spawnpoint.transform.rotation, 0);
 		CameraController controller = Camera.main.GetComponent<CameraController> ();
 		Player_Physics_Controller phys = go.transform.GetChild(1).GetComponent<Player_Physics_Controller> ();
 		controller.associate(go.transform.GetChild(1).transform.GetChild(0).gameObject, phys);
+		referee.GetComponent<Referee>().addPlayerToTrack(playerNum,go);
 		// we also have to activate the GUI system (edit by Daan 13-10-2014)
 		GUI_ingame.SetActive (true);
 	}

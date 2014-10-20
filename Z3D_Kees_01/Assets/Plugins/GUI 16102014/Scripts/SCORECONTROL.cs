@@ -37,7 +37,7 @@ public class SCORECONTROL : MonoBehaviour {
 		Player_alive = new int[]{1,1,1,1};
 	}
 
-	public void PlayerDied(int Number){
+	/*public void PlayerDied(int Number){
 		Player_alive[Number]=0;
 		for(int i=0; i<4; i++){
 			if(Player_alive[i]==1){
@@ -47,25 +47,25 @@ public class SCORECONTROL : MonoBehaviour {
 				}
 			}
 		}
-	}
-	/*
+	}*/
+
 	public void AddScore1 (int newScoreValue) {
-		score(1) += newScoreValue;
-		UpdateScore1();
+		score1 += newScoreValue;
+		UpdateScore(1);
 	}
 	public void AddScore2 (int newScoreValue) {
-		score(2) += newScoreValue;
-		UpdateScore2();
+		score2 += newScoreValue;
+		UpdateScore(2);
 	}
 	public void AddScore3 (int newScoreValue) {
-		score(3) += newScoreValue;
-		UpdateScore3();
+		score3 += newScoreValue;
+		UpdateScore(3);
 	}
 	public void AddScore4 (int newScoreValue) {
-		score(4) += newScoreValue;
-		UpdateScore4();
+		score4 += newScoreValue;
+		UpdateScore(4);
 	}
-	*/
+
 	void UpdateScore(int Number) {
 		if(Number==1)
 			scoreText1.text = "Player1: " + score1;
