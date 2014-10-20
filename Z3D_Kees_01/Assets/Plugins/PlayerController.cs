@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour {
 	public  Player_Physics_Controller PlayerPhysics;
 	//Private Variables
 
-	private bool hasDied;
 	private float temp_counter;
 	private float gap_counter;
 	private float gap_width;
@@ -31,7 +30,6 @@ public class PlayerController : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		hasDied = false;
 		gap_counter = Gap_Counter_init;
 		gap_width = 0f;
 		rigidbody.freezeRotation = false;
@@ -93,20 +91,10 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.tag == "Tail"){
 			//if colliding with an object with label "Tail" set freezecounter
-			GameObject Network = GameObject.Find ("NetworkController");
-			NetworkManager networkManager = Network.GetComponent<NetworkManager>();
-			Debug.Log("Player " + playerNum + " died");
-			networkManager.RestartMGame(playerNum);
-			hasDied = true;
+			GameObject networkController = GameObject.Find ("NetworkController");
+			NetworkManager networkManager = networkController.GetComponent<NetworkManager>();
+			networkManager.PlayerDied(playerNum);
 		}
-	}
-
-	public bool isDead(){
-		if(hasDied){
-			hasDied = false;
-			return true;
-		}
-		return false;
 	}
 
 	/*void OnCollisionEnter(Collision collision) {

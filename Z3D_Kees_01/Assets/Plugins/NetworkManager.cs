@@ -4,12 +4,13 @@ using System.Collections;
 public class NetworkManager : MonoBehaviour {
 	public GameObject playerPrefab1;
 	public GameObject playerPrefab2;
+	public GameObject refereePrefab;
 	public GameObject GUI_Prefab;
 	private GameObject playerPrefab;
 	public GameObject GUI_ingame; //added by Daan 13-10-2014
 	public int maxPlayers;
-	public GameObject referee;
-	public GameObject scoreCounter;
+	private GameObject referee;
+	private GameObject scoreCounter;
 
 	private float buttonX;
 	private float buttonY;
@@ -20,7 +21,6 @@ public class NetworkManager : MonoBehaviour {
 	public HostData[] hostData;
 	private int currentPlayer;
 	private bool levelloaded;
-	private GameObject clientplayer;
 	
 	private GameObject spawnpoint;
 	
@@ -40,7 +40,7 @@ public class NetworkManager : MonoBehaviour {
 	}
 
 	public void startServer(){
-		Network.InitializeServer (4, 250001, !Network.HavePublicAddress());
+		Network.InitializeServer (2, 250001, !Network.HavePublicAddress());
 		MasterServer.RegisterHost (gameSeekName, "Zatacka 3D DEMO Game", "A simple networking demo for Zatacka 3D");
 	}
 	
@@ -52,8 +52,10 @@ public class NetworkManager : MonoBehaviour {
 			}
 			levelloaded = true;
 			if(Network.peerType == NetworkPeerType.Server){
-				referee = GameObject.Find("Referee");
-				referee.SetActive(true);
+				if(referee == null){
+					referee = (GameObject) Network.Instantiate(refereePrefab,new Vector3(0,0,0), Quaternion.identity, 0);
+					referee.SetActive(true);
+				}
 			}
 			spawnPlayer();
 	 }
@@ -81,11 +83,6 @@ public class NetworkManager : MonoBehaviour {
 				refreshing = false;
 				hostData = MasterServer.PollHostList();
 			}
-		}
-		if (Network.peerType == NetworkPeerType.Server && levelloaded == true) {
-			int scorep1 = referee.GetComponent<Referee>().getCurrentScore(1);
-			int scorep2 = referee.GetComponent<Referee>().getCurrentScore(2);
-			networkView.RPC("updateScore",RPCMode.AllBuffered, scorep1, scorep2);
 		}
 	}
 
@@ -121,35 +118,27 @@ public class NetworkManager : MonoBehaviour {
 		}
 	}
 
-	public void RestartMGame(int playernum){
+	public void PlayerDied(int playernum){
 		if(playernum == 1 && Network.peerType == NetworkPeerType.Server)
-			StartMGame();
+			referee.GetComponent<Referee>().playerScoredPoint(2);
 		else if(playernum == 2 && Network.peerType == NetworkPeerType.Client)
-			StartMGame();
+			networkView.RPC("updateClientPlayerScore", RPCMode.Server, 1);
 	}
 	
 	public void StartMGame(){
 		networkView.RPC( "LoadLevel", RPCMode.AllBuffered,1);
 	}
-	
+
+	[RPC]
+		public void updateClientPlayerScore(int playernum){
+			referee.GetComponent<Referee>().playerScoredPoint(playernum);
+		}
+
 	[RPC]
 		public void LoadLevel(int number){
 			Application.LoadLevel(number);
 		}
 
-	[RPC]
-		public void updateScore(int score1, int score2){
-			scoreCounter.GetComponent<SCORECONTROL>().SetScore1(score1);
-			scoreCounter.GetComponent<SCORECONTROL>().SetScore2(score2);
-		}
-
-	[RPC]
-		public void addToReferee(int playernum, NetworkViewID viewid){
-			if(Network.peerType == NetworkPeerType.Server){
-				NetworkView view = NetworkView.Find(viewid);
-				referee.GetComponent<Referee>().addPlayerToTrack(playernum, view.gameObject.GetComponent<NetworkManager>().clientplayer);
-			}
-		}
 
 	public void spawnPlayer(){
 		int playerNum;
@@ -167,12 +156,6 @@ public class NetworkManager : MonoBehaviour {
 		CameraController controller = Camera.main.GetComponent<CameraController> ();
 		Player_Physics_Controller phys = go.transform.GetChild(1).GetComponent<Player_Physics_Controller> ();
 		controller.associate(go.transform.GetChild(1).transform.GetChild(0).gameObject, phys);
-		if(Network.peerType == NetworkPeerType.Server)
-			referee.GetComponent<Referee>().addPlayerToTrack(playerNum, go.transform.GetChild(0).gameObject);
-		else if(Network.peerType == NetworkPeerType.Client){
-			clientplayer = go.transform.GetChild(0).gameObject;
-			networkView.RPC("addToReferee", RPCMode.AllBuffered, playerNum, networkView.viewID);
-		}
 		// we also have to activate the GUI system (edit by Daan 13-10-2014)
 		GUI_ingame.SetActive (true);
 	}

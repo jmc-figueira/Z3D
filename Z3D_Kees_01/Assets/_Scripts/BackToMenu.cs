@@ -16,6 +16,8 @@ public class BackToMenu : MonoBehaviour {
 			Destroy(guiSys);
 			GameObject networkC = GameObject.Find("NetworkController");
 			Destroy(networkC);
+			GameObject referee = GameObject.FindGameObjectWithTag("Referee");
+			Destroy(referee);
 		}
 	}
 }
