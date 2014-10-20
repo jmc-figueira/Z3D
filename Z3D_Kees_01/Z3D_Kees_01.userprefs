@@ -1,18 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/NetworkManager.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Plugins\NetworkManager.cs">
     <Files>
-      <File FileName="Assets/Plugins/NetworkManager.cs" Line="142" Column="1" />
-      <File FileName="Assets/Plugins/Referee.cs" Line="29" Column="1" />
-      <File FileName="Assets/Plugins/Player_Physics_Controller.cs" Line="55" Column="1" />
-      <File FileName="Assets/Plugins/GUI 16102014/Scripts/SCORECONTROL.cs" Line="1" Column="1" />
-      <File FileName="Assets/Plugins/PlayerController.cs" Line="34" Column="1" />
+      <File FileName="Assets\Plugins\NetworkManager.cs" Line="179" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/joao/Documents/Computer Graphics/Z3D/Z3D_Kees_01/Assets/Plugins/NetworkManager.cs" line="137" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
