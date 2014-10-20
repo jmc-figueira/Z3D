@@ -78,5 +78,19 @@ public class SCORECONTROL : MonoBehaviour {
 		else 
 			Debug.Log("Massive error on score");
 	}
+
+	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info){
+		string sc1, sc2, sc3, sc4;
+		if(stream.isWriting){
+			sc1 = scoreText1;
+			sc2 = scoreText2;
+			sc3 = scoreText3;
+			sc4 = scoreText4;
+			stream.Serialize(ref sc1);
+			stream.Serialize(ref sc2);
+			stream.Serialize(ref sc3);
+			stream.Serialize(ref sc4);
+		}
+	}
 	
 }

@@ -47,7 +47,7 @@ public class NetworkManager : MonoBehaviour {
 	}
 	
 	 void OnLevelWasLoaded(int level) {
-	 if (level == 1){
+	 	if (level == 1){
 			levelloaded = true;
 			if(Network.peerType == NetworkPeerType.Server){
 				if(referee == null){
@@ -60,9 +60,8 @@ public class NetworkManager : MonoBehaviour {
 				}
 			}
 			spawnPlayer();
-			hasRestartedAfterDeath = true;
-	 }
-        
+	 	}
+		hasRestartedAfterDeath = true;
     }
 
 	public void OnServerInitialized(){
@@ -80,7 +79,7 @@ public class NetworkManager : MonoBehaviour {
 		refreshing = true;
 	}
 
-	public void Update() {
+	public void Update(){
 		if (refreshing) {
 			if(MasterServer.PollHostList().Length > 0){
 				refreshing = false;
@@ -122,6 +121,7 @@ public class NetworkManager : MonoBehaviour {
 	}
 	[RPC]
 	public void ProcessPlayerDied(int playernumber){
+		hasRestartedAfterDeath = true;
 		if(Network.peerType == NetworkPeerType.Server && hasRestartedAfterDeath){
 			hasRestartedAfterDeath = false;
 			referee.GetComponent<Referee>().playerScoredPoint(playernumber);
