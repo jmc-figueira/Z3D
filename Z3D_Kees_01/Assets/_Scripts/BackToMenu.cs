@@ -12,11 +12,9 @@ public class BackToMenu : MonoBehaviour {
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			Application.LoadLevel(0);
-			GameObject guiSys;
-			guiSys = GameObject.Find("GUISYSTEM");
+			GameObject guiSys = GameObject.Find("GUISYSTEM");
 			Destroy(guiSys);
-			GameObject networkC;
-			networkC = GameObject.Find("NetworkController");
+			GameObject networkC = GameObject.Find("NetworkController");
 			Destroy(networkC);
 		}
 	}

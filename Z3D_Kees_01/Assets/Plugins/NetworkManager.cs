@@ -45,8 +45,10 @@ public class NetworkManager : MonoBehaviour {
 	
 	 void OnLevelWasLoaded(int level) {
 	 if (level == 1){
-			scoreCounter = GameObject.Find("GUISYSTEM");
-			scoreCounter.SetActive(true);
+			if(scoreCounter == null){
+				scoreCounter = GameObject.Find("GUISYSTEM");
+				scoreCounter.SetActive(true);
+			}
 			levelloaded = true;
 			if(Network.peerType == NetworkPeerType.Server){
 				referee = GameObject.Find("Referee");
