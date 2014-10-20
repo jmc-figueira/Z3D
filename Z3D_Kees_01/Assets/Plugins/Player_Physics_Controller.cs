@@ -6,7 +6,8 @@ public class Player_Physics_Controller : MonoBehaviour {
 	public float speed;
 	public float rot_speed;
 	public float Gravity_Strength;
-
+	public bool offline = false;
+	
 	private float collision_counter_test;
 
 	public GameController gameController;
@@ -26,7 +27,7 @@ public class Player_Physics_Controller : MonoBehaviour {
 	
 	// Update is called once per frame
 void FixedUpdate () {
-		if(networkView.isMine){
+		if(networkView.isMine || offline){
 			//This is the freeze option controlled by gameController
 			//if(gameController.Freeze_Counter==0f){
 			
