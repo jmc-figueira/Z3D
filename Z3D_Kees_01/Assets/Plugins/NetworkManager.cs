@@ -122,9 +122,9 @@ public class NetworkManager : MonoBehaviour {
 	}
 
 	public void RestartMGame(int playernum){
-		if(playernum = 1 && Network.peerType == NetworkPeerType.Server)
+		if(playernum == 1 && Network.peerType == NetworkPeerType.Server)
 			StartMGame();
-		else if(playernum = 2 && Network.peerType == NetworkPeerType.Client)
+		else if(playernum == 2 && Network.peerType == NetworkPeerType.Client)
 			StartMGame();
 	}
 	
