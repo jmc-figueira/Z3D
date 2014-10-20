@@ -2,13 +2,16 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/NetworkManager.cs">
     <Files>
-      <File FileName="Assets/Plugins/Referee.cs" Line="42" Column="13" />
-      <File FileName="Assets/Plugins/NetworkManager.cs" Line="17" Column="24" />
+      <File FileName="Assets/Plugins/Referee.cs" Line="28" Column="1" />
+      <File FileName="Assets/Plugins/NetworkManager.cs" Line="54" Column="9" />
       <File FileName="Assets/Plugins/PlayerController.cs" Line="100" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/joao/Documents/Computer Graphics/Z3D/Z3D_Kees_01/Assets/Plugins/Referee.cs" line="28" />
+      <Breakpoint file="/Users/joao/Documents/Computer Graphics/Z3D/Z3D_Kees_01/Assets/Plugins/NetworkManager.cs" line="45" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
