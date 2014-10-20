@@ -1,0 +1,22 @@
+Initialize engine version: 4.6.0b20 (a3ecf55f1347)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: AMD Radeon R9 200 Series (ID=0x679a)
+    Vendor:   ATI
+    VRAM:     3058 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Kees\Documents\GitHub\yolo\Z3D\Z3D_Kees_01\Final_Game_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Kees\Documents\GitHub\yolo\Z3D\Z3D_Kees_01\Final_Game_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Kees\Documents\GitHub\yolo\Z3D\Z3D_Kees_01\Final_Game_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Kees\Documents\GitHub\yolo\Z3D\Z3D_Kees_01\Final_Game_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Kees\Documents\GitHub\yolo\Z3D\Z3D_Kees_01\Final_Game_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Kees\Documents\GitHub\yolo\Z3D\Z3D_Kees_01\Final_Game_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Kees\Documents\GitHub\yolo\Z3D\Z3D_Kees_01\Final_Game_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\Kees\Documents\GitHub\yolo\Z3D\Z3D_Kees_01\Final_Game_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\Kees\Documents\GitHub\yolo\Z3D\Z3D_Kees_01\Final_Game_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Kees\Documents\GitHub\yolo\Z3D\Z3D_Kees_01\Final_Game_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.081 seconds
+desktop: 1920x1200 60Hz; virtual: 1920x1200 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
