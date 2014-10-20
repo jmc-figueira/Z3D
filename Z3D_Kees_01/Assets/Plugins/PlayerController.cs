@@ -25,11 +25,13 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 rot_vector;
 	public Vector3 previous_normal;
 	public Vector3 current_normal = new Vector3(0f,1f,0f);
+	private bool isDead;
 
 	#endregion
 	
 	// Use this for initialization
 	void Start () {
+		isDead = false;
 		gap_counter = Gap_Counter_init;
 		gap_width = 0f;
 		rigidbody.freezeRotation = false;
@@ -91,9 +93,12 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.tag == "Tail"){
 			//if colliding with an object with label "Tail" set freezecounter
-			GameObject networkController = GameObject.Find ("NetworkController");
-			NetworkManager networkManager = networkController.GetComponent<NetworkManager>();
-			networkManager.PlayerDied(playerNum);
+			if(!isDead){
+				isDead = true;
+				GameObject networkController = GameObject.Find ("NetworkController");
+				NetworkManager networkManager = networkController.GetComponent<NetworkManager>();
+				networkManager.PlayerDied(playerNum);
+			}
 		}
 	}
 

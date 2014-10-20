@@ -5,12 +5,11 @@ public class NetworkManager : MonoBehaviour {
 	public GameObject playerPrefab1;
 	public GameObject playerPrefab2;
 	public GameObject refereePrefab;
-	public GameObject GUI_Prefab;
 	private GameObject playerPrefab;
 	public GameObject GUI_ingame; //added by Daan 13-10-2014
 	public int maxPlayers;
 	private GameObject referee;
-	private GameObject scoreCounter;
+	//private GameObject scoreCounter;
 
 	private float buttonX;
 	private float buttonY;
@@ -21,8 +20,7 @@ public class NetworkManager : MonoBehaviour {
 	public HostData[] hostData;
 	private int currentPlayer;
 	private bool levelloaded;
-	private bool hasRestartedAfterDeath;
-	
+
 	private GameObject spawnpoint;
 	
 	public string username = "";
@@ -38,30 +36,24 @@ public class NetworkManager : MonoBehaviour {
 		buttonH = Screen.width * 0.02f;
 		currentPlayer = 0;
 		levelloaded = false;
-		hasRestartedAfterDeath = true;
 	}
 
 	public void startServer(){
-		Network.InitializeServer (2, 250001, !Network.HavePublicAddress());
+		Network.InitializeServer (maxPlayers, 250001, !Network.HavePublicAddress());
 		MasterServer.RegisterHost (gameSeekName, "Zatacka 3D DEMO Game", "A simple networking demo for Zatacka 3D");
 	}
 	
 	 void OnLevelWasLoaded(int level) {
 	 	if (level == 1){
 			levelloaded = true;
-			if(Network.peerType == NetworkPeerType.Server){
+			if(Network.peerType == NetworkPeerType.Server && networkView.isMine){
 				if(referee == null){
 					referee = (GameObject) Network.Instantiate(refereePrefab,new Vector3(0,0,0), Quaternion.identity, 0);
 					referee.SetActive(true);
 				}
-				if(scoreCounter == null){
-					scoreCounter = (GameObject) Network.Instantiate(GUI_Prefab, new Vector3(0,0,0), Quaternion.identity, 0);
-					scoreCounter.SetActive(true);
-				}
 			}
 			spawnPlayer();
 	 	}
-		hasRestartedAfterDeath = true;
     }
 
 	public void OnServerInitialized(){
@@ -121,9 +113,7 @@ public class NetworkManager : MonoBehaviour {
 	}
 	[RPC]
 	public void ProcessPlayerDied(int playernumber){
-		hasRestartedAfterDeath = true;
-		if(Network.peerType == NetworkPeerType.Server && hasRestartedAfterDeath){
-			hasRestartedAfterDeath = false;
+		if(Network.peerType == NetworkPeerType.Server){
 			referee.GetComponent<Referee>().playerScoredPoint(playernumber);
 		}
 	}
@@ -145,7 +135,6 @@ public class NetworkManager : MonoBehaviour {
 	[RPC]
 		public void LoadLevel(int number){
 			Application.LoadLevel(number);
-			hasRestartedAfterDeath = true;
 		}
 
 

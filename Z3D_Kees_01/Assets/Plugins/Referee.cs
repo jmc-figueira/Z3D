@@ -4,7 +4,8 @@ using System.Collections;
 public class Referee : MonoBehaviour {
 	private int player1Score;
 	private int player2Score;
-	private GameObject scoreGUI;
+	public GameObject scoreGUI;
+	public GameObject scoreGUI_prefab;
 
 	// Use this for initialization
 	void Start () {
@@ -31,12 +32,26 @@ public class Referee : MonoBehaviour {
 	}
 	
 	void FixedUpdate(){
-		if(scoreGUI == null)
-			scoreGUI = GameObject.FindGameObjectWithTag("GSystem");
-		else{
-			scoreGUI.GetComponent<SCORECONTROL>().SetScore1(player1Score);
-			scoreGUI.GetComponent<SCORECONTROL>().SetScore2(player2Score);
+		if(Network.peerType == NetworkPeerType.Server){
+			if(player1Score >= 10 || player2Score >=10){
+				Application.LoadLevel(0);
+				GameObject guiSys = GameObject.FindGameObjectWithTag("GSystem");
+				Destroy(guiSys);
+				GameObject networkC = GameObject.Find("NetworkController");
+				Destroy(networkC);
+				Destroy(this);
+			}
+			else{
+				if(scoreGUI == null){
+					Debug.Log ("Instantiating");
+					scoreGUI = (GameObject) Network.Instantiate(scoreGUI_prefab, new Vector3(0,0,0), Quaternion.identity, 0);
+					scoreGUI.SetActive(true);
+				}
+				else{
+					scoreGUI.GetComponent<SCORECONTROL>().SetScore1(player1Score);
+					scoreGUI.GetComponent<SCORECONTROL>().SetScore2(player2Score);
+				}
+			}
 		}
 	}
-
 }
