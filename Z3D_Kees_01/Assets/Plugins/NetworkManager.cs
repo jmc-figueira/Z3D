@@ -19,6 +19,7 @@ public class NetworkManager : MonoBehaviour {
 	public HostData[] hostData;
 	private int currentPlayer;
 	private bool levelloaded;
+	private GameObject clientplayer;
 	
 	private GameObject spawnpoint;
 	
@@ -136,8 +137,9 @@ public class NetworkManager : MonoBehaviour {
 		}
 
 	[RPC]
-		public void addToReferee(int playernum, GameObject player){
-			referee.GetComponent<Referee>().addPlayerToTrack(playernum, player);
+		public void addToReferee(int playernum, NetworkViewID viewid){
+			NetworkView view = NetworkView.Find(viewid);
+		referee.GetComponent<Referee>().addPlayerToTrack(playernum, view.gameObject.GetComponent<NetworkManager>().clientplayer);
 		}
 
 	public void spawnPlayer(){
@@ -158,8 +160,10 @@ public class NetworkManager : MonoBehaviour {
 		controller.associate(go.transform.GetChild(1).transform.GetChild(0).gameObject, phys);
 		if(Network.peerType == NetworkPeerType.Server)
 			referee.GetComponent<Referee>().addPlayerToTrack(playerNum, go);
-		else if(Network.peerType == NetworkPeerType.Client)
-			networkView.RPC("addToReferee", RPCMode.Server, playerNum, go);
+		else if(Network.peerType == NetworkPeerType.Client){
+			clientplayer = go;
+			networkView.RPC("addToReferee", RPCMode.Server, playerNum, networkView.viewID);
+		}
 		// we also have to activate the GUI system (edit by Daan 13-10-2014)
 		GUI_ingame.SetActive (true);
 	}
