@@ -47,8 +47,10 @@ public class NetworkManager : MonoBehaviour {
 			scoreCounter = GameObject.Find("GUISYSTEM");
 			scoreCounter.SetActive(true);
 			levelloaded = true;
-			referee = GameObject.Find("Referee");
-			referee.SetActive(true);
+			if(Network.peerType == NetworkPeerType.Server){
+				referee = GameObject.Find("Referee");
+				referee.SetActive(true);
+			}
 			spawnPlayer();
 	 }
         
@@ -133,6 +135,11 @@ public class NetworkManager : MonoBehaviour {
 			scoreCounter.GetComponent<SCORECONTROL>().AddScore2(score2);
 		}
 
+	[RPC]
+		public void addToReferee(int playernum, GameObject player){
+			referee.GetComponent<Referee>().addPlayerToTrack(playernum, player);
+		}
+
 	public void spawnPlayer(){
 		int playerNum;
 		if(Network.peerType == NetworkPeerType.Server){
@@ -149,7 +156,10 @@ public class NetworkManager : MonoBehaviour {
 		CameraController controller = Camera.main.GetComponent<CameraController> ();
 		Player_Physics_Controller phys = go.transform.GetChild(1).GetComponent<Player_Physics_Controller> ();
 		controller.associate(go.transform.GetChild(1).transform.GetChild(0).gameObject, phys);
-		referee.GetComponent<Referee>().addPlayerToTrack(playerNum,go);
+		if(Network.peerType == NetworkPeerType.Server)
+			referee.GetComponent<Referee>().addPlayerToTrack(playerNum, go);
+		else if(Network.peerType == NetworkPeerType.Client)
+			networkView.RPC("addToReferee", RPCMode.Server, playerNum, go);
 		// we also have to activate the GUI system (edit by Daan 13-10-2014)
 		GUI_ingame.SetActive (true);
 	}
